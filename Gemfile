@@ -36,6 +36,7 @@ gem 'bootstrap-sass', '>= 3.4.1'
 gem 'thin'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'rack-flash3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

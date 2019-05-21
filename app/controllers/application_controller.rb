@@ -1,6 +1,10 @@
+require 'pry'
+require 'rack-flash'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  require 'pry'
+  use Rack::Flash
+
   before_action :current_user
   before_action :require_login, except: [:new, :create, :home]
 
@@ -8,8 +12,15 @@ class ApplicationController < ActionController::Base
     session[:user_id]
   end
 
+  def logged_in?
+    !!current_user
+  end
+
   private
   def require_login
-    redirect_to root_path unless current_user
+    unless logged_in?
+      flash[:error] = "Please sign in first."
+      redirect_to root_url
+    end
   end
 end
