@@ -1,11 +1,15 @@
-<%= f.label 'Name' %><br>
-<%= f.text_field :name %><br><br>
+<%= form_for @client do |f| %>
+  <%= f.label 'Name' %><br>
+  <%= f.text_field :name %><br><br>
 
-<%= f.label 'Email Address' %><br>
-<%= f.text_field :email %><br><br>
+  <%= f.label 'Email Address' %><br>
+  <%= f.text_field :email %><br><br>
 
-<%= f.label 'URL of profile picture' %><br>
-<%= f.text :extra %><br><br>
+  <%= f.label 'URL of profile picture' %><br>
+  <%= f.text_field :extra %><br><br>
 
-<%= f.label 'Password' %><br>
-<%= f.password_field :password %><br><br>
+  <%= f.label 'Password' %><br>
+  <%= f.password_field :password %><br><br>
+
+  <%= f.submit "Submit" %>
+<% end %>

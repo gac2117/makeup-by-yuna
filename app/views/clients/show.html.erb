@@ -1,0 +1,6 @@
+<h1>Welcome, <%= @client.name %>!</h1><br>
+<img src="<%= @client.extra %>"><br><br>
+<!-- <% @appointments.each do |app| %>
+  <%= link_to "<%= @client.app.date_time %>", client_appointment_path(@client.app) %>
+<% end %> -->
+<%= link_to "Click here", new_client_appointment_path %> to create a new appointment.
