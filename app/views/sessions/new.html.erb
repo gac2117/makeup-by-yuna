@@ -1,4 +1,7 @@
 <h1>Sign In</h1>
+<div id='flash' class='error'>
+  <%= flash[:error] %>
+</div>
 <%= form_for @user, url: "/signin" do |f| %>
   <%= f.label :email %>
   <%= f.text_field :email %><br><br>

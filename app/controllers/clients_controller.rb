@@ -8,7 +8,11 @@ class ClientsController < ApplicationController
   end
 
   def new
-    @client = Client.new
+    if logged_in?
+      redirect_to client_path(current_user)
+    else
+      @client = Client.new
+    end
   end
 
   def create
@@ -17,6 +21,7 @@ class ClientsController < ApplicationController
       session[:user_id] = @client.id
       redirect_to client_path(@client)
     else
+      flash[:error] = "Please try again."
       render :new
     end
   end
