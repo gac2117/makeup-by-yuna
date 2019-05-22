@@ -6,9 +6,10 @@
     </tr>
     <% @artist.appointments.each do |app| %>
       <tr>
-        <td align="center"><%= app.client.name %>
-        <td align="center"><%= app.date_time %></td>
+        <td align="center"><%= link_to "#{app.client.name}", client_path(app.client_id) %>
+        <td align="center"><%= link_to "#{app.date_time } %>", client_appointment_path(app.client_id, app) %></td>
       </tr>
     <% end %>
   </table>
   <br><br>
+  <%= link_to "Profile page", artist_path(@artist) %>

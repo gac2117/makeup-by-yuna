@@ -1,0 +1,6 @@
+<h1>Here are the appointment details</h1>
+
+Date and Time: <%= @appointment.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %><br>
+Type of Service: <%= @appointment.service %><br>
+Makeup Artist Name: <%= @appointment.artist.name %><br>
+Comments: <%= @appointment.comments %>

@@ -3,10 +3,17 @@
   <%= f.datetime_select :date_time %><br><br>
 
   <%= f.label 'Service' %><br>
-  <%= f.select :service, [['Consultation', 1], ['Event'], 2] %><br><br>
+  <%= f.radio_button :service, "Consultation" %>
+  <%= label_tag(:service_consultation, "Consultation") %>
+  <%= f.radio_button :service, "Event" %>
+  <%= label_tag(:service_event, "Event") %>
+  <br><br>
 
+  <%= f.label 'Comments / Requests' %><br>
+  <%= f.text_field :comments %><br><br>
+  
   <%= f.label 'Makeup Artist' %><br>
-  <%= f.collection_select(:artist_id, @artists, :id, :name) %><br>
-<br>
+  <%= f.collection_select(:artist_id, Artist.all, :id, :name) %><br><br>
+  <%= f.hidden_field :client_id, :value => @client.id %>
   <%= f.submit "Submit" %>
 <% end %>

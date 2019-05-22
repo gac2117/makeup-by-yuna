@@ -7,6 +7,7 @@
 <% if @client %>
 <%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.
 <% else %>
-<%= link_to "Click here", appointments_path %> to view your appointments.
+<%= link_to "Click here", appointments_path %> to view your appointments.<br><br>
+<%= link_to "Sign Out", signout_path, method: :delete %>
 <% end %>
 <br><br>
