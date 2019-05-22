@@ -1,0 +1,15 @@
+<h1>Appointments for <%= @artist.name %></h1>
+<table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Appointment Date</th>
+    </tr>
+    <% @todays_exercises.each do |exercise| %>
+      <tr>
+        <td align="center"><%= exercise.user.username %>
+        <td align="center"><%= exercise.name %></td>
+        <td align="center"><%= exercise.minutes %> minutes</td>
+      </tr>
+    <% end %>
+  </table>
+  <br><br>
