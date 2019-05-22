@@ -5,12 +5,13 @@ class ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find_by(id: params[:id])
-    if Client.find_by(id: current_user)
-      @client = Client.find_by(id: current_user)
-    elsif current_user == params[:id]
-      @current_artist = Artist.find_by(id: params[:id])
+    @user = User.find_by(id: current_user)
+    if @user == @artist
+      @current_artist = @user
+    elsif Artist.find_by(id: @user)
+      @other_artist = @user
     else
-      @other_artist = Artist.find_by(id:current_user)
+      @client = Client.find_by(id: @user)
     end
   end
 
