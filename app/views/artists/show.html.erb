@@ -1,6 +1,12 @@
-<h1> Welcome, <%= @artist.name %>!</h1>
-<div id='flash' class='error'>
-  <%= flash[:error] %>
-</div><br>
+<h1> Welcome to <%= @artist.name %>'s page!</h1>
 
-<%= link_to "Sign Out", signout_path, method: :delete %>
+<%= @artist.extra %><br>
+<p>The services I currently provide are Consultations and Wedding makeup</p>
+<br><br>
+
+<% if @client %>
+<%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.
+<% else %>
+<%= link_to "Click here", appointments_path %> to view your appointments.
+<% end %>
+<br><br>
