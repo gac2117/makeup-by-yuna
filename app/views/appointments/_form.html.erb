@@ -1,12 +1,12 @@
-<%= form_for @app do |f| %>
+<%= form_for :appointment do |f| %>
   <%= f.label 'Date and Time' %><br>
-  <%= f.datetime_field :date_time %><br><br>
+  <%= f.datetime_select :date_time %><br><br>
 
   <%= f.label 'Service' %><br>
-  <%= f.select (:service, [['Consultation', 1], ['Event', 2]]) %><br><br>
+  <%= f.select :service, [['Consultation', 1], ['Event'], 2] %><br><br>
 
   <%= f.label 'Makeup Artist' %><br>
   <%= f.collection_select(:artist_id, @artists, :id, :name) %><br>
-
+<br>
   <%= f.submit "Submit" %>
 <% end %>

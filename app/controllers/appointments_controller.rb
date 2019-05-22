@@ -13,7 +13,6 @@ class AppointmentsController < ApplicationController
   end
 
   def new
-    @app = Appointment.new
     @artists = Artist.all
   end
 
