@@ -8,3 +8,5 @@ Comments: <%= @app.comments %>
 <%= link_to "Edit", edit_client_appointment_path(@app.client_id, @app.id) %> this appointment.
 <br><br>
 <%= link_to "Delete", client_appointment_path(@app.client_id, @app.id), method: :delete %> this appointment.
+<br><br>
+<%= link_to "Go back", client_path(@app.client_id) %> to your profile page.

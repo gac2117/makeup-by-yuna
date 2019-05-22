@@ -4,10 +4,14 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    @artist = Artist.find_by(id: params[:id])
     if Client.find_by(id: current_user)
       @client = Client.find_by(id: current_user)
+    elsif current_user == params[:id]
+      @current_artist = Artist.find_by(id: params[:id])
+    else
+      @other_artist = Artist.find_by(id:current_user)
     end
-    @artist = Artist.find_by(id: params[:id])
   end
 
   def new
@@ -25,11 +29,11 @@ class ArtistsController < ApplicationController
 
   def create
     @artist = Artist.new(artist_params)
-    if @artist.save
+    if @artist.save && params[:secret] == "BTS"
       session[:user_id] = @artist.id
       redirect_to artist_path(@artist)
     else
-      flash[:error] = "Please try again."
+      flash[:error] = "Please try again. #{@artist.errors.full_messages.to_sentence}"
       render :new
     end
   end
@@ -49,6 +53,6 @@ class ArtistsController < ApplicationController
 
   private
   def artist_params
-    params.require(:artist).permit(:name, :email, :extra, :password)
+    params.require(:artist).permit(:name, :email, :extra, :password, :secret)
   end
 end

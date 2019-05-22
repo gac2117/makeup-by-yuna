@@ -4,6 +4,7 @@ class ClientsController < ApplicationController
 
   def show
     @client = Client.find_by(id: params[:id])
+    @user = User.find_by(id: current_user)
   end
 
   def new
@@ -21,7 +22,7 @@ class ClientsController < ApplicationController
       session[:user_id] = @client.id
       redirect_to client_path(@client)
     else
-      flash[:error] = "Please try again."
+      flash[:error] = "Please try again. #{@client.errors.full_messages.to_sentence}"
       render :new
     end
   end

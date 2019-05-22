@@ -6,8 +6,12 @@
 
 <% if @client %>
 <%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.
-<% else %>
+
+<% elsif @current_artist %>
 <%= link_to "Click here", appointments_path %> to view your appointments.<br><br>
 <%= link_to "Sign Out", signout_path, method: :delete %>
+
+<% else %>
+<%= link_to "Go back", artist_path(@other_artist) %> to your profile page.
 <% end %>
 <br><br>

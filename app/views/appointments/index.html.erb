@@ -1,13 +1,15 @@
 <h1>Appointments for <%= @artist.name %></h1>
 <table border="1">
     <tr>
-      <th>Name</th>
+      <th>Client Name</th>
       <th>Appointment Date</th>
+      <th>Details</th>
     </tr>
     <% @artist.appointments.each do |app| %>
       <tr>
         <td align="center"><%= link_to "#{app.client.name}", client_path(app.client_id) %>
-        <td align="center"><%= link_to "#{app.date_time}", client_appointment_path(app.client_id, app) %></td>
+        <td align="center"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
+        <td align="center"><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
       </tr>
     <% end %>
   </table>

@@ -1,4 +1,4 @@
-<h1>Welcome, <%= @client.name %>!</h1>
+<h1><%= @client.name %>'s Profile Page</h1>
 <div id='flash' class='error'>
   <%= flash[:error] %>
 </div>
@@ -8,17 +8,25 @@
 
 <img width="200" src="<%= @client.extra %>"><br><br>
 
+<% if @client == @user %>
 <table border="1">
-    <tr>
-      <th>Appointment Date</th>
-    </tr>
-    <% @client.appointments.each do |app| %>
-      <tr>
-        <td align="center"><%= link_to "#{app.date_time.strftime("%A, %b %d, %Y at %l:%M %p")}" , client_appointment_path(@client, app) %></td>
-      </tr>
-    <% end %>
-  </table><br>
+  <tr>
+    <th>Appointment Date and Time</th>
+    <th>Makeup Artist</th>
+    <th>Details</th>
+  </tr>
+  <% @client.appointments.each do |app| %>
+  <tr>
+    <td align="center"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
+    <td align="center"><%= app.artist.name %></td>
+    <td align="center"><%= link_to "Click Here", client_appointment_path(@client, app) %></td>
+  </tr>
+  <% end %>
+</table><br>
 
 <%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.
 <br><br>
 <%= link_to "Sign Out", signout_path, method: :delete %>
+<% else %>
+Go back to my <%= link_to "appointments", appointments_path %>
+<% end %>
