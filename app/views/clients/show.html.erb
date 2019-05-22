@@ -1,8 +1,23 @@
 <h1>Welcome, <%= @client.name %>!</h1>
 <div id='flash' class='error'>
   <%= flash[:error] %>
+</div>
+<div id='flash' class='notice'>
+  <%= flash[:notice] %>
 </div><br>
+
 <img width="200" src="<%= @client.extra %>"><br><br>
+
+<table border="1">
+    <tr>
+      <th>Appointment Date</th>
+    </tr>
+    <% @client.appointments.each do |app| %>
+      <tr>
+        <td align="center"><%= link_to "#{app.date_time.strftime("%A, %b %d, %Y at %l:%M %p")}" , client_appointment_path(@client, app) %></td>
+      </tr>
+    <% end %>
+  </table><br>
 
 <%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.
 <br><br>

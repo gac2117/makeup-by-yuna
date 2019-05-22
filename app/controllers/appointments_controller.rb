@@ -9,7 +9,7 @@ class AppointmentsController < ApplicationController
   end
 
   def show
-    @appointment = Appointment.find_by(id: params[:id])
+    @app = Appointment.find_by(id: params[:id])
   end
 
   def new
@@ -34,12 +34,34 @@ class AppointmentsController < ApplicationController
   end
 
   def edit
+    if !!Client.find_by(id: current_user)
+      @app = Appointment.find_by(id: params[:id])
+      @client = Client.find_by(id: current_user)
+    else
+      flash[:error] = "You must be a client to edit"
+      redirect_to artist_path(current_user)
+    end
   end
 
   def update
+    @app = Appointment.find_by(id: params[:id])
+    if @app.update(app_params)
+      redirect_to client_appointment_path(current_user, @app)
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @app = Appointment.find_by(id: params[:id])
+    if @app.client == current_user
+      @app.delete
+      flash[:notice] = "Your appointment has been deleted."
+      redirect_to client_path(current_user)
+    else
+      flash[:error] = "You cannot delete other people's records."
+      redirect_to client_appointment_path(current_user, @app)
+    end
   end
 
   private

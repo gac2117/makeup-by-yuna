@@ -3,8 +3,7 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = User.find_by(id: current_user)
-#    @appointments = Appointment.by_client(current_user)
+    @client = Client.find_by(id: params[:id])
   end
 
   def new

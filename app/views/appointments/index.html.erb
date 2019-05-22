@@ -7,7 +7,7 @@
     <% @artist.appointments.each do |app| %>
       <tr>
         <td align="center"><%= link_to "#{app.client.name}", client_path(app.client_id) %>
-        <td align="center"><%= link_to "#{app.date_time } %>", client_appointment_path(app.client_id, app) %></td>
+        <td align="center"><%= link_to "#{app.date_time}", client_appointment_path(app.client_id, app) %></td>
       </tr>
     <% end %>
   </table>
