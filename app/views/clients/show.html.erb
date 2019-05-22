@@ -1,4 +1,7 @@
-<h1>Welcome, <%= @client.name %>!</h1><br>
+<h1>Welcome, <%= @client.name %>!</h1>
+<div id='flash' class='error'>
+  <%= flash[:error] %>
+</div><br>
 <img width="200" src="<%= @client.extra %>"><br><br>
 
 <%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.

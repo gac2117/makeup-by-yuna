@@ -9,6 +9,7 @@ class ClientsController < ApplicationController
 
   def new
     if logged_in?
+      flash[:error] = "You are already signed in."
       redirect_to client_path(current_user)
     else
       @client = Client.new
