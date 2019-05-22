@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   post "/signin", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
 
-  resources :artists, only: [:index, :show, :new, :create] do
-    resources :appointments, only: [:index, :show]
+  resources :clients, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :appointments
   end
 
-  resources :clients, only: [:index, :show, :new, :create, :edit, :update] do
-    resources :appointments, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :appointments, only: [:index, :create, :update]
+
+  resources :artists, only: [:index, :show, :new, :create] do
+    resources :appointments, only: [:index, :show]
   end
 
 end

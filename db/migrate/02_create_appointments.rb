@@ -4,8 +4,8 @@ class CreateAppointments < ActiveRecord::Migration[4.2]
       t.belongs_to :artist
       t.belongs_to :client
       t.datetime :date_time
-      t.integer :price
       t.string :service
+      t.text :comments
       t.timestamps null: false
     end
   end

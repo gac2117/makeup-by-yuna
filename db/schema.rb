@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2) do
     t.integer "artist_id"
     t.integer "client_id"
     t.datetime "date_time"
-    t.integer "price"
     t.string "service"
+    t.text "comments"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

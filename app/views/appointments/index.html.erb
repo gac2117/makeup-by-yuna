@@ -4,11 +4,10 @@
       <th>Name</th>
       <th>Appointment Date</th>
     </tr>
-    <% @todays_exercises.each do |exercise| %>
+    <% @artist.appointments.each do |app| %>
       <tr>
-        <td align="center"><%= exercise.user.username %>
-        <td align="center"><%= exercise.name %></td>
-        <td align="center"><%= exercise.minutes %> minutes</td>
+        <td align="center"><%= app.client.name %>
+        <td align="center"><%= app.date_time %></td>
       </tr>
     <% end %>
   </table>
