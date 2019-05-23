@@ -9,19 +9,27 @@ class SessionsController < ApplicationController
          u.name = auth['info']['name']
          u.email = auth['info']['email']
          u.extra = auth['info']['image']
-       else
-     @user = User.find_by(email: params[:user][:email])
-   end
-     if @user && @user.authenticate(params[:user][:password])
+       end
        session[:user_id] = @user.id
        if Client.find_by(id: current_user)
          redirect_to client_path(@user)
        else
          redirect_to artist_path(@user)
        end
+
      else
-       flash[:error] = "Please try again. #{@user.errors.full_messages.to_sentence}"
-       redirect_to signin_path
+       @user = User.find_by(email: params[:user][:email])
+       if @user && @user.authenticate(params[:user][:password])
+         session[:user_id] = @user.id
+         if Client.find_by(id: current_user)
+           redirect_to client_path(@user)
+         else
+           redirect_to artist_path(@user)
+         end
+       else
+         flash[:error] = "Please try again. #{@user.errors.full_messages.to_sentence}"
+         redirect_to signin_path
+       end
      end
    end
 
