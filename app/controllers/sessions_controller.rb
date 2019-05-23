@@ -17,6 +17,7 @@ class SessionsController < ApplicationController
          @user = Client.new(email: auth['info']['email']) do |u|
            u.name = auth['info']['name']
            u.extra = auth['info']['image']
+           u.password = SecureRandom.hex
          end
          if @user.save
           session[:user_id] = @user.id
