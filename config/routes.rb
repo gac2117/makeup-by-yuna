@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get "/signin", to: "sessions#new"
   post "/signin", to: "sessions#create"
-  get '/auth/facebook/callback' => 'facebook#create'
+  get '/auth/facebook/callback' => 'sessions#create'
   delete "/signout", to: "sessions#destroy"
 
   resources :clients, only: [:index, :show, :new, :create, :edit, :update] do
