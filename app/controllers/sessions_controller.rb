@@ -5,8 +5,7 @@ class SessionsController < ApplicationController
 
    def create
      if auth
-       if @user = User.find_by(email: auth['email']) 
-        raise "Existing user".inspect
+       if @user = User.find_by(email: auth['info']['email']) 
          session[:user_id] = @user.id
          if Client.find_by(id: current_user)
            redirect_to client_path(@user)
