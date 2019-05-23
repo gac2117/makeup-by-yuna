@@ -23,4 +23,9 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
+
+   
+   def auth
+     request.env['omniauth.auth']
+   end
 end

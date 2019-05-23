@@ -26,7 +26,7 @@ class ClientsController < ApplicationController
       session[:user_id] = @client.id
       redirect_to client_path(@client)
     else
-      flash[:error] = "Please try again. #{@client.errors.full_messages.to_sentence}"
+      flash[:error] = "Please try again."
       render :new
     end
   end
