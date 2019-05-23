@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
          u.name = auth['info']['name']
          u.email = auth['info']['email']
          u.extra = auth['info']['image']
+         u.save
        end
        session[:user_id] = @user.id
        if Client.find_by(id: current_user)
