@@ -1,14 +1,31 @@
 <%= render '/layouts/navbar_signedin' %>
 
-<h1>Here are the appointment details</h1>
-
-Date and Time: <%= @app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %><br>
-Type of Service: <%= @app.service %><br>
-Makeup Artist Name: <%= @app.artist.name %><br>
-Comments: <%= @app.comments %>
-<br><br>
+<h1>Appointment Details</h1>
+<ul class="list-group">
+	<li class="list-group-item">
+		<h5 class="list-group-item-heading">Date and Time:</h5> 
+		<p class="list-group-item-text"><%= @app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></p>
+	</li>
+	<li class="list-group-item">
+		<h5 class="list-group-item-heading">Type of Service:</h5>
+		<p class="list-group-item-text"><%= @app.service %></p>
+	</li>
+	<li class="list-group-item">
+		<h5 class="list-group-item-heading">Makeup Artist Name:</h5>
+		<p class="list-group-item-text"><%= @app.artist.name %></p>
+	</li>
+	<li class="list-group-item">
+		<h5 class="list-group-item-heading">Comments or Requests:</h5>
+		<p class="list-group-item-text"><%= @app.comments %></p>
+	</li>
+</ul>
+<br>
+<% if @client %>
 <%= link_to "Edit", edit_client_appointment_path(@app.client_id, @app.id) %> this appointment.
 <br><br>
 <%= link_to "Delete", client_appointment_path(@app.client_id, @app.id), method: :delete %> this appointment.
 <br><br>
 <%= link_to "Go back", client_path(@app.client_id) %> to your profile page.
+<% else %>
+<%= link_to "Go back", appointments_path %> to view your appointments.
+<% end %>

@@ -11,18 +11,22 @@
 <img width="200" src="<%= @client.extra %>"><br><br>
 
 <% if @client == @user %>
-<table border="1">
-  <tr>
-    <th>Appointment Date and Time</th>
-    <th>Makeup Artist</th>
-    <th>Details</th>
-  </tr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Appointment Date and Time</th>
+      <th>Makeup Artist</th>
+      <th>Details</th>
+    </tr>
+  </thead>
   <% @apps.each do |app| %>
-  <tr>
-    <td align="center"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
-    <td align="center"><%= link_to "#{app.artist.name}", artist_path(app.artist) %></td>
-    <td align="center"><%= link_to "Click Here", client_appointment_path(@client, app) %></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
+      <td><%= link_to "#{app.artist.name}", artist_path(app.artist) %></td>
+      <td><%= link_to "Click Here", client_appointment_path(@client, app) %></td>
+    </tr>
+  </tbody>
   <% end %>
 </table><br>
 
@@ -30,7 +34,6 @@
 <br><br>
 <%= link_to "Click here", edit_client_path(@client) %> to edit your profile.
 <br><br>
-<%= link_to "Sign Out", signout_path, method: :delete %>
 <% else %>
 Go back to my <%= link_to "appointments", appointments_path %>
 <% end %>

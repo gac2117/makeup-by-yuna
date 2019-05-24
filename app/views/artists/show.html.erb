@@ -7,7 +7,6 @@ About <%= @artist.name %>:<br>
 <br>
 
 <% if @client %>
-<%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment with <%= @artist.name %>.<br><br>
 <%= link_to "Go back", client_path(@client) %> to your profile page.
 
 <% elsif @current_artist %>
