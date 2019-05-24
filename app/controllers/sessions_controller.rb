@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
               redirect_to artist_path(@user)
             end
         else
-          flash[:error] = "Please try again. #{@user.errors.full_messages.to_sentence}"
+          flash[:error] = "Please try again."
           redirect_to signin_path
         end
      end
