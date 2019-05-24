@@ -1,6 +1,6 @@
 # Makeup by Yuna
 
-This is a Rails app I made for my Rails portfolio project. I got the idea for this app through my friend works as a makeup artist as a side job. This app will keep track of appointments between makeup artists and clients. The makeup artists and clients will be able to sign up, log in, and log out securely. They will also be able to use Facebook to sign up and log in. The makeup artist can see and filter through all the upcoming appointments they have with their clients. The clients will be able to view their appointments with the makeup artist and also create a new appointment.
+This is a Rails app I made for my Rails portfolio project. I got the idea for this app through my friend who works as a makeup artist as a side job. This app will keep track of appointments made between makeup artists and clients. The makeup artists and clients will be able to sign up, log in, and log out securely. Clients will also be able to use Facebook to sign up and log in. The makeup artists will need to provide a secret code in order to sign up. The makeup artist can view all the upcoming appointments they have with their clients. The clients will be able to view their appointments with the makeup artist and also create, edit, and delete a new appointment.
 
 ## Installation
 1. Fork the repository.
