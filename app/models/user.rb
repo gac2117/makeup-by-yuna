@@ -11,16 +11,4 @@ class User < ApplicationRecord
 		    u.password = SecureRandom.hex
 	    end
 	end
-
-	# if @user = User.find_by(email: auth['info']['email']) 
-	# 	return @user 	    
- #    else
-	#     @user = Client.new(email: auth['info']['email']) do |u|
-	       
-	#     raise "new user".inspect
-	#     if @user.save
-	# 	    return @user
-	# 	end
- #    end
- #  end
 end
