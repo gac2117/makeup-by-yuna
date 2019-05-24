@@ -15,8 +15,8 @@ class AppointmentsController < ApplicationController
 
   def new
     if !!Client.find_by(id: current_user)
-      @app = Appointment.new
       @client = Client.find_by(id: current_user)
+      @app = Appointment.new
     else
       flash[:error] = "You must be a client to view"
       redirect_to artist_path(current_user)
@@ -29,7 +29,7 @@ class AppointmentsController < ApplicationController
       @app.save
       redirect_to client_appointment_path(current_user, @app)
     else
-      flash[:error] = "Please try again. #{@app.errors.full_messages.to_sentence}"
+      flash[:error] = "Please try again."
       render :new
     end
   end

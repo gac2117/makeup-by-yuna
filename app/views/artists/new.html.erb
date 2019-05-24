@@ -1,4 +1,19 @@
 <h3>Sign Up as a Makeup Artist</h3>
+<% if @artist.errors.any? %>
+  <div id="error_explanation">
+    <h4>
+      <%= pluralize(@artist.errors.count, "error") %>
+      prohibited this appointment from being saved:
+    </h4>
+ 
+    <ul>
+    <% @artist.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div id='flash' class='error'>
   <%= flash[:error] %>
 </div>

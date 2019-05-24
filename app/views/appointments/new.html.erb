@@ -1,4 +1,19 @@
 <h1>Make an appointment</h1>
+<% if @app.errors.any? %>
+  <div id="error_explanation">
+    <h4>
+      <%= pluralize(@app.errors.count, "error") %>
+      prohibited this appointment from being saved:
+    </h4>
+ 
+    <ul>
+    <% @app.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div id='flash' class='error'>
   <%= flash[:error] %>
 </div><br>
