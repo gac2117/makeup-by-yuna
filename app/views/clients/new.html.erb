@@ -1,3 +1,7 @@
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=358385804815972&autoLogAppEvents=1"></script>
+
+
 <h3>Sign Up as a Client</h3>
 <% if @client.errors.any? %>
   <div id="error_explanation">
@@ -18,3 +22,7 @@
   <%= flash[:error] %>
 </div><br>
   <%= render 'form' %>
+<br>
+
+<h4>Or</h4><br>
+<a href="/auth/facebook"><img src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&_nc_ht=scontent-atl3-1.xx&oh=b196524687d8f32a91f1f08702c26ddb&oe=5D51E9EA" style="width:200px;height:35px;"></a>
