@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Makeup By Yuna</title>
     <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <title>Makeup By Yuna</title>
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    
-    <!-- <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          Makeup by Yuna
-        </div>
-        <a href="<%= root_url %>">Home</a>
-        <div class="dropdown">
-          <button class="dropbtn">Sign Up
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="<%= new_client_path %>">As a Client</a>
-            <a href="<%= new_artist_path %>">As a Makeup Artist</a>
-          </div>
-        </div>
-        <a href="<%= signin_path %>">Sign In</a>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+      <div class="navbar-brand">
+        Makeup by Yuna
       </div>
-    </nav> -->
+      <!-- Links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= root_path %>">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= artists_path %>">Makeup Artists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= signin_path %>">Sign In</a>
+        </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+          <div class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown">
+            Sign Up
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="<%= new_client_path %>">As a Client</a>
+            <a class="dropdown-item" href="<%= new_artist_path %>">As a Makeup Artist</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
     <div class="container"  role="main">
       <%= yield %>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
