@@ -1,5 +1,5 @@
-<%= render '/layouts/navbar_signedin' %>
-
+<%= render '/layouts/navbar_notsignedin' %>
+<center>
 <h3>Sign Up as a Makeup Artist</h3>
 <% if @artist.errors.any? %>
   <div id="error_explanation">
@@ -21,3 +21,4 @@
 </div>
 <br>
 <%= render 'form' %>
+</center>
