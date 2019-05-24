@@ -5,6 +5,7 @@ class ClientsController < ApplicationController
   def show
     @client = Client.find_by(id: params[:id])
     @user = User.find_by(id: current_user)
+    @apps = @client.appointments.by_date
   end
 
   def new

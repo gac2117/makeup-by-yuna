@@ -15,7 +15,7 @@
     <th>Makeup Artist</th>
     <th>Details</th>
   </tr>
-  <% @client.appointments.each do |app| %>
+  <% @apps.each do |app| %>
   <tr>
     <td align="center"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
     <td align="center"><%= link_to "#{app.artist.name}", artist_path(app.artist) %></td>

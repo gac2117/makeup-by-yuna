@@ -2,6 +2,7 @@ class AppointmentsController < ApplicationController
   def index
     if !!Artist.find_by(id: current_user)
       @artist = Artist.find_by(id: current_user)
+      @apps = @artist.appointments.by_date
     else
       flash[:error] = "You must be a makeup artist to view"
       redirect_to client_path(current_user)
