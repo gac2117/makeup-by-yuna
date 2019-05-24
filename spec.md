@@ -2,20 +2,20 @@
 
 Specs:
 - [x] Using Ruby on Rails for the project
-- [ ] Include at least one has_many relationship (x has_many y; e.g. User has_many Recipes)
-- [ ] Include at least one belongs_to relationship (x belongs_to y; e.g. Post belongs_to User)
-- [ ] Include at least two has_many through relationships (x has_many y through z; e.g. Recipe has_many Items through Ingredients)
-- [ ] Include at least one many-to-many relationship (x has_many y through z, y has_many x through z; e.g. Recipe has_many Items through Ingredients, Item has_many Recipes through Ingredients)
-- [ ] The "through" part of the has_many through includes at least one user submittable attribute, that is to say, some attribute other than its foreign keys that can be submitted by the app's user (attribute_name e.g. ingredients.quantity)
-- [ ] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
-- [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
-- [ ] Include signup (how e.g. Devise)
-- [ ] Include login (how e.g. Devise)
-- [ ] Include logout (how e.g. Devise)
-- [ ] Include third party signup/login (how e.g. Devise/OmniAuth)
-- [ ] Include nested resource show or index (URL e.g. users/2/recipes)
-- [ ] Include nested resource "new" form (URL e.g. recipes/1/ingredients/new)
-- [ ] Include form display of validation errors (form URL e.g. /recipes/new)
+- [x] Included two has_many relationships (Clients and Artists have many Appointments)
+- [x] Included two belongs_to relationships (Appointment belongs to Client and Artist)
+- [x] Included two has_many through relationships (Artist has many Clients through Appointments, and Client has many Artists through Appointments)
+- [x] Include at least one many-to-many relationship (Artist has many Clients through Appointments, and Client has many Artists through Appointments)
+- [x] The "through" part of the has_many through (Appointments) includes three user submittable attributes: date and time, type of service, and comments.
+- [x] Included reasonable validations, like presence and uniqueness.
+- [x] Included a class level ActiveRecord scope method (Appointment.by_date URL: /clients/1)
+- [x] Include signup (Bcrypt)
+- [x] Include login (Bcrypt)
+- [x] Include logout (Bcrypt)
+- [x] Include third party signup/login (Facebook/OmniAuth)
+- [x] Include nested resource show or index (URL: /artists/1/appointments)
+- [x] Include nested resource "new" form (URL: /clients/1/appointments/new)
+- [x] Include form display of validation errors (form URL: /clients/new)
 
 Confirm:
 - [ ] The application is pretty DRY
