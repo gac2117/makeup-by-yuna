@@ -1,19 +1,24 @@
 <%= render '/layouts/navbar_signedin' %>
 
 <h1>Appointments for <%= @artist.name %></h1>
-<table border="1">
+<br>
+<table class="table">
+  <thead>
     <tr>
       <th>Client Name</th>
       <th>Appointment Date</th>
       <th>Details</th>
     </tr>
+  </thead>
     <% @apps.each do |app| %>
+    <tbody>
       <tr>
-        <td align="center"><%= link_to "#{app.client.name}", client_path(app.client_id) %>
-        <td align="center"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
-        <td align="center"><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
+        <td><%= link_to "#{app.client.name}", client_path(app.client_id) %>
+        <td><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
+        <td><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
       </tr>
+    </tbody>
     <% end %>
   </table>
   <br><br>
-  <%= link_to "Profile page", artist_path(@artist) %>
+  Go to your <%= link_to "Profile page", artist_path(@artist) %>

@@ -55,7 +55,7 @@ class AppointmentsController < ApplicationController
 
   def destroy
     @app = Appointment.find_by(id: params[:id])
-    if @app.client == current_user
+    if @app.client.id == current_user
       @app.delete
       flash[:notice] = "Your appointment has been deleted."
       redirect_to client_path(current_user)

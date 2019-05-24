@@ -28,6 +28,8 @@
 
 <%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.
 <br><br>
+<%= link_to "Click here", edit_client_path(@client) %> to edit your profile.
+<br><br>
 <%= link_to "Sign Out", signout_path, method: :delete %>
 <% else %>
 Go back to my <%= link_to "appointments", appointments_path %>

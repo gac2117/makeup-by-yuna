@@ -39,7 +39,7 @@ class ClientsController < ApplicationController
   def update
     @client = User.find_by(id: current_user)
     if @client.update(client_params)
-      redirect_to cilent_path(@client)
+      redirect_to client_path(@client)
     else
       render :edit
     end
