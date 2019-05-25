@@ -2,10 +2,10 @@
 <h3>Sign Up as a Client</h3>
 <% if @client.errors.any? %>
   <div id="error_explanation">
-    <h4>
+    <p>
       <%= pluralize(@client.errors.count, "error") %>
       prohibited this appointment from being saved:
-    </h4>
+    </p>
  
     <ul>
     <% @client.errors.full_messages.each do |msg| %>
@@ -14,10 +14,7 @@
     </ul>
   </div>
 <% end %>
-
-<div id='flash' class='error'>
-  <%= flash[:error] %>
-</div><br>
+<br>
   <%= render 'form' %>
 <br>
 

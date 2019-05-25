@@ -34,7 +34,6 @@ class AppointmentsController < ApplicationController
       @app.save
       redirect_to client_appointment_path(current_user, @app)
     else
-      flash[:error] = "Please try again."
       render :new
     end
   end

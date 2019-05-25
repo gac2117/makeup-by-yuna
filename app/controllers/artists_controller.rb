@@ -34,7 +34,6 @@ class ArtistsController < ApplicationController
       session[:user_id] = @artist.id
       redirect_to artist_path(@artist)
     else
-      flash[:error] = "Please try again."
       render :new
     end
   end
