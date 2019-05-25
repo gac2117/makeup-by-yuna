@@ -4,6 +4,7 @@ require 'rack-flash'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   use Rack::Flash
+  helper_method :current_user, :logged_in?
 
   before_action :current_user
   before_action :require_login, except: [:new, :create, :home]
