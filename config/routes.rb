@@ -16,4 +16,7 @@ Rails.application.routes.draw do
     resources :appointments, only: [:index, :show]
   end
 
+  resources :password_resets
+
+
 end
