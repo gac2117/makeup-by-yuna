@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
    def create
     if auth
       # logs in using Facebook
-      @user = User.find_or_create_by_omniauth(auth)
+      @user = Client.find_or_create_by_omniauth(auth)
         if @user
           session[:user_id] = @user.id
           if Client.find_by(id: current_user)
