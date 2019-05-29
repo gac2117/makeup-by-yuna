@@ -8,6 +8,8 @@ About <%= @artist.name %>:<br>
 <%= link_to "Go back", client_path(@client) %> to your profile page.
 
 <% elsif @current_artist %>
+<%= link_to "Click here", edit_artist_path(@current_artist) %> to edit your profile.
+<br><br>
 <%= link_to "Click here", appointments_path %> to view your appointments.<br><br>
 <%= link_to "Sign Out", signout_path, method: :delete %>
 

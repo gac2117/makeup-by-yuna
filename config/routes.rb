@@ -12,11 +12,12 @@ Rails.application.routes.draw do
 
   resources :appointments, only: [:index, :create, :update]
 
-  resources :artists, only: [:index, :show, :new, :create] do
+  resources :artists, only: [:index, :show, :new, :create, :edit, :update] do
     resources :appointments, only: [:index, :show]
   end
 
-  resources :password_resets
+  resources :password_reset 
 
+  get "/most_popular_artist", to: "artists#popular"
 
 end

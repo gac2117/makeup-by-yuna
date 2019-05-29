@@ -30,10 +30,10 @@ class AppointmentsController < ApplicationController
 
   def create
     @app = Appointment.new(app_params)
-    if @app.valid?
-      @app.save
+    if @app.save
       redirect_to client_appointment_path(current_user, @app)
     else
+      @client = Client.find_by(id: current_user)
       render :new
     end
   end
@@ -53,6 +53,7 @@ class AppointmentsController < ApplicationController
     if @app.update(app_params)
       redirect_to client_appointment_path(current_user, @app)
     else
+      @client = Client.find_by(id: current_user)
       render :edit
     end
   end

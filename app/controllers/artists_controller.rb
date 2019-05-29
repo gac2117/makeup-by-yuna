@@ -51,6 +51,13 @@ class ArtistsController < ApplicationController
     end
   end
 
+  def popular
+    hash = Artist.app_count
+    popular_id = Artist.popular(hash)
+    @artist = Artist.find_by(id: popular_id)
+  end
+
+
   private
   def artist_params
     params.require(:artist).permit(:name, :email, :extra, :password, :secret)
