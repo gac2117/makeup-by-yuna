@@ -53,7 +53,7 @@ class ArtistsController < ApplicationController
 
   def popular
     hash = Artist.app_count
-    popular_id = Artist.popular(hash)
+    popular_id = User.popular(hash)
     @artist = Artist.find_by(id: popular_id)
   end
 

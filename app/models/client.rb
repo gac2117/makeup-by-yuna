@@ -3,6 +3,8 @@ class Client < User
   has_many :artists, through: :appointments 
 
   
+  	scope :app_count, -> { joins(:appointments).group('client_id').count }
+
 	def self.find_or_create_by_omniauth(auth)
 	  	self.where(email: auth['info']['email']).first_or_create do |u|
 	  		u.name = auth['info']['name']

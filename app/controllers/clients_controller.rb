@@ -44,6 +44,12 @@ class ClientsController < ApplicationController
     end
   end
 
+    def popular
+      hash = Client.app_count
+      popular_id = User.popular(hash)
+      @client = Client.find_by(id: popular_id)
+    end
+
   private
   def client_params
     params.require(:client).permit(:name, :email, :extra, :password)
