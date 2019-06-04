@@ -18,7 +18,4 @@ Rails.application.routes.draw do
 
   resources :password_reset 
 
-  get "/most_popular_artist", to: "artists#popular"
-  get "/most_popular_client", to: "clients#popular"
-
 end
