@@ -4,7 +4,7 @@ class AppointmentsController < ApplicationController
       @artist = Artist.find_by(id: current_user)
       @apps = @artist.appointments.by_date
       respond_to do |format|
-        format.html { render :show }
+        format.html { render :index }
         format.json { render json: @apps, status: 200}
       end
     else
@@ -35,7 +35,9 @@ class AppointmentsController < ApplicationController
   def create
     @app = Appointment.new(app_params)
     if @app.save
-      redirect_to client_appointment_path(current_user, @app)
+      respond_to do |format|
+        format.html { redirect_to client_appointment_path(current_user, @app) }
+        format.json { render json: @app, status: 201 }
     else
       @client = Client.find_by(id: current_user)
       render :new
@@ -55,7 +57,9 @@ class AppointmentsController < ApplicationController
   def update
     @app = Appointment.find_by(id: params[:id])
     if @app.update(app_params)
-      redirect_to client_appointment_path(current_user, @app)
+      respond_to do |format|
+        format.html { redirect_to client_appointment_path(current_user, @app) }
+        format.json { render json: @app, status: 202 }
     else
       @client = Client.find_by(id: current_user)
       render :edit
