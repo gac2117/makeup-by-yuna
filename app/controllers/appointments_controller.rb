@@ -3,6 +3,10 @@ class AppointmentsController < ApplicationController
     if !!Artist.find_by(id: current_user)
       @artist = Artist.find_by(id: current_user)
       @apps = @artist.appointments.by_date
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @apps, status: 200}
+      end
     else
       flash[:error] = "You must be a makeup artist to view"
       redirect_to client_path(current_user)

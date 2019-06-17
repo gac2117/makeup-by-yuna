@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require appointments
+//= require clients
 //= require turbolinks
 //= require_tree .
