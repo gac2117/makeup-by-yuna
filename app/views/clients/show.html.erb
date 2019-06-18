@@ -7,7 +7,8 @@
 </div><br>
 
 <img width="200" src="<%= @client.extra %>"><br><br>
-
+<button id="edit_profile"><%= link_to "Edit Profile", edit_client_path(@client) %></button>
+<br><br>
 <% if @client == @user %>
 <table class="table">
   <thead>
@@ -28,10 +29,9 @@
   <% end %>
 </table><br>
 
-<%= link_to "Click here", new_client_appointment_path(@client) %> to create a new appointment.
+<button id="new_app"><%= link_to "New Appointment", new_client_appointment_path(@client) %></button>
 <br><br>
-<%= link_to "Click here", edit_client_path(@client) %> to edit your profile.
 <br><br>
 <% else %>
-Go back to my <%= link_to "appointments", appointments_path %>
+<button id="artist_apps"><%= link_to "Go Back", appointments_path %></button>
 <% end %>

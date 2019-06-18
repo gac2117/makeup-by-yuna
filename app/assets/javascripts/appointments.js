@@ -11,3 +11,8 @@ class Appointment {
 		return `You have booked a(n) ${this.service} appointment for ${this.date_time}.`
 	}
 }
+
+$('#new_appointment').on('submit', function(e) {
+	e.preventDefault();
+	console.log('submitting post');
+})

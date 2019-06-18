@@ -5,15 +5,15 @@ About <%= @artist.name %>:<br>
 <br>
 
 <% if @client %>
-<%= link_to "Go back", client_path(@client) %> to your profile page.
+<button id="go_back"><%= link_to "Go back", client_path(@client) %></button>
 
 <% elsif @current_artist %>
-<%= link_to "Click here", edit_artist_path(@current_artist) %> to edit your profile.
+<button id="edit_profile"><%= link_to "Edit Profile", edit_artist_path(@current_artist) %></button>
 <br><br>
-<%= link_to "Click here", appointments_path %> to view your appointments.<br><br>
-<%= link_to "Sign Out", signout_path, method: :delete %>
+<button id="view_apps"><%= link_to "View Appointments", appointments_path %></button><br><br>
+<button id="sign_out"><%= link_to "Sign Out", signout_path, method: :delete %></button>
 
 <% else %>
-<%= link_to "Go back", artist_path(@other_artist) %> to your profile page.
+<button id="go_back"><%= link_to "Go back", artist_path(@other_artist) %></button>
 <% end %>
 <br><br>

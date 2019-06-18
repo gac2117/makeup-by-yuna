@@ -2,10 +2,9 @@ $(function () {
   $(".table").on('load', function() {
     let id = $(this).data("id");
     $.get("/clients/" + id + ".json", function(data) {
-      // Replace text of body-id div
-      $("#app_date").html(getFullDateTime())
-      $("#app_artist").html(data[])
-      $("#body-" + id).html(data["description"]);
+      $("#app_date").html(data["date_time"]);
+      $("#app_artist").html(data[]);
+      $("#app_details").html(data["comments"]);
     });
   });
 });

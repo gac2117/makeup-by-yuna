@@ -19,11 +19,10 @@
 </ul>
 <br>
 <% if @client %>
-<%= link_to "Edit", edit_client_appointment_path(@app.client_id, @app.id) %> this appointment.
+<button id="edit_app"><%= link_to "Edit", edit_client_appointment_path(@app.client_id, @app.id) %></button>
+<button id="delete_app"><%= link_to "Delete", client_appointment_path(@app.client_id, @app.id), method: :delete %></button>
 <br><br>
-<%= link_to "Delete", client_appointment_path(@app.client_id, @app.id), method: :delete %> this appointment.
-<br><br>
-<%= link_to "Go back", client_path(@app.client_id) %> to your profile page.
+<button id="back"><%= link_to "Go back", client_path(@app.client_id) %></button>
 <% else %>
-<%= link_to "Go back", appointments_path %> to view your appointments.
+<button id="back"><%= link_to "Go back", appointments_path %></button>
 <% end %>

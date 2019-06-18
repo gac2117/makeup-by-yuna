@@ -17,8 +17,16 @@ class AppointmentsController < ApplicationController
     @app = Appointment.find_by(id: params[:id])
     if !!Client.find_by(id: current_user)
       @client = Client.find_by(id: current_user)
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @app, status: 200}
+      end
     else
       @artist = Artist.find_by(id:current_user)
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @app, status: 200}
+      end
     end
   end
 
@@ -38,6 +46,7 @@ class AppointmentsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to client_appointment_path(current_user, @app) }
         format.json { render json: @app, status: 201 }
+      end
     else
       @client = Client.find_by(id: current_user)
       render :new
@@ -60,6 +69,7 @@ class AppointmentsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to client_appointment_path(current_user, @app) }
         format.json { render json: @app, status: 202 }
+      end
     else
       @client = Client.find_by(id: current_user)
       render :edit
