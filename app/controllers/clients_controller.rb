@@ -6,10 +6,6 @@ class ClientsController < ApplicationController
     @client = Client.find_by(id: params[:id])
     @user = User.find_by(id: current_user)
     @apps = @client.appointments.by_date
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @apps, status: 200}
-    end
   end
 
   def new
