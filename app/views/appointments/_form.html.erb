@@ -1,4 +1,4 @@
-<%= form_for @app do |f| %>
+<%= form_for @app, :html => {:id => "new_app"} do |f| %>
   <%= f.label 'Date and Time' %><br>
   <%= f.datetime_field :date_time, min: Date.today %><br><br>
 

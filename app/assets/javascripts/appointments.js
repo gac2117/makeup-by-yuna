@@ -1,3 +1,27 @@
+$(() => {
+	bindClickHandlers()
+})
+
+const bindClickHandlers = () => {
+	$('#new_appointment').on('click', (e) => {
+		e.preventDefault();
+		fetch(`/appointments.json`)
+			.then(res => res.json())
+			.then(data => {
+				data.
+			})
+	})
+
+	$('#new_app').on('submit', function(e) {
+		e.preventDefault();
+		const values = $(this).serialize()
+		$.post('/appointments', values)
+		.done(function(data) {
+
+		})
+	})
+}
+
 class Appointment {
 	constructor(date_time, service, comments, artist_id, client_id) {
 		this.date_time = new Date(date_time);
@@ -12,7 +36,3 @@ class Appointment {
 	}
 }
 
-$('#new_appointment').on('submit', function(e) {
-	e.preventDefault();
-	console.log('submitting post');
-})
