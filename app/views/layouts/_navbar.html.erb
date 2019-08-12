@@ -38,6 +38,16 @@
             <li class="nav-item">
               <a class="nav-link" href="<%= signin_path %>">Sign In</a>
             </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Sign Up
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="<%= new_client_path %>">As Client</a>
+                <a class="dropdown-item" href="<%= new_artist_path %>">As Artist</a>
+              </div>
+            </li>
           <% end %>
         </ul>
     </div>

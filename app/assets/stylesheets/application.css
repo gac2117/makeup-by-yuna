@@ -12,7 +12,18 @@
  *
  *= require_tree .
  *= require_self
+ *= require rails_bootstrap_forms
  */
+
+body {
+	background-image: url("/assets/makeup_img.png");
+	background-color: white;
+	height: 750px;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+}
 
 #flash {
 	color: red;
@@ -34,8 +45,8 @@
   display: table;
 }
 
-.navbar {
-  margin-bottom: 20px;
+.container {
+	padding-top: 15px;
 }
 
 .full-width {

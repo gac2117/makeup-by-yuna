@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pry'
 gem 'bootstrap-sass', '>= 3.4.1'
+gem "bootstrap_form", ">= 4.2.0"
 gem 'thin', '~> 1.7'
 gem 'omniauth'
 gem 'omniauth-facebook'
