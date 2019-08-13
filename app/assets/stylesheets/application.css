@@ -17,12 +17,13 @@
 
 body {
 	background-image: url("/assets/makeup_img.png");
-	background-color: white;
-	height: 900px;
+	background-color: #F8F9FA;
+	height: 700px;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
 	position: relative;
+	background-attachment: fixed;
 }
 
 #flash {
@@ -57,4 +58,14 @@ body {
 	position: relative;
 	right: 50%;
 	width: 100vw;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #F6DAAD;
+  color: #212529;
+  text-align: center;
 }

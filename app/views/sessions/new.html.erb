@@ -3,13 +3,12 @@
   <%= flash[:error] %>
 </div>
 <br>
+<h5 style="color:#F8F9FA">SIGN IN<br>_____________</h5><br>
 <div class="card" style="width:600px">
-  <div class="card-header"><h3>Sign In</h3></div>
   <div class="card-body">
 	<%= bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8", url: "/signin" do |f| %>
-	  <%= f.text_field :email %>
-	  <%= f.password_field :password %>
-	  <br>
+	  <%= f.text_field :email, label: "Email Address:" %>
+	  <%= f.password_field :password, label: "Password:" %>
 	  <%= f.submit "Sign In", class: "btn btn-warning" %>
 	<% end %>
 	<hr>
