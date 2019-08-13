@@ -8,24 +8,23 @@
 </div><br>
 
 <img width="200" src="<%= @client.extra %>"><br><br>
-  
-<br><br>
 
-    <% if @client == @user %>
-    <div class="card" style="width: 800px">
-  <div class="card-body">
+  <% if @client == @user %>
     <div class="btn btn-light btn-sm">
-    <%= link_to "Edit Profile", edit_client_path(@client), :class => "btn btn-sm", :id => "edit_profile" %>
-     </div>
-      <table class="table table-bordered">
-        <thead class="thead-light">
+      <%= link_to "Edit Profile", edit_client_path(@client), :class => "btn btn-sm", :id => "edit_profile" %>
+    </div>
+    <br><br>
+    <div class="card" style="width: 800px">
+      <div class="card-body">
+        <table class="table table-bordered">
+          <thead class="thead-light">
           <tr>
             <th>Appointment Date and Time</th>
             <th>Makeup Artist</th>
             <th>Details</th>
           </tr>
-        </thead>
-      <% @apps.each do |app| %>
+          </thead>
+        <% @apps.each do |app| %>
         <tbody>
           <tr>
             <td id="app_date"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
