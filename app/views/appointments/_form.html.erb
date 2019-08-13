@@ -1,19 +1,13 @@
-<%= form_for @app do |f| %>
-  <%= f.label 'Date and Time' %><br>
-  <%= f.datetime_field :date_time, min: Date.today %><br><br>
-
-  <%= f.label 'Service' %><br>
-  <%= f.radio_button :service, "Consultation" %>
+<%= bootstrap_form_for @app, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8" do |f| %>
+  <%= f.datetime_field :date_time, min: Date.today, label: "Date & Time:" %>
+  <%= f.form_group :service, label: { text: "Service:" } do %>
+  <%= f.radio_button_without_bootstrap :service, "Consultation" %>
   <%= label_tag(:service_consultation, "Consultation") %>
-  <%= f.radio_button :service, "Event" %>
+  <%= f.radio_button_without_bootstrap :service, "Event" %>
   <%= label_tag(:service_event, "Event") %>
-  <br><br>
-
-  <%= f.label 'Comments / Requests' %><br>
-  <%= f.text_field :comments %><br><br>
-
-  <%= f.label 'Makeup Artist' %><br>
-  <%= f.collection_select(:artist_id, Artist.all, :id, :name) %><br><br>
+  <% end %>
+  <%= f.text_field :comments, label: "Comments / Requests:" %>
+  <%= f.collection_select(:artist_id, Artist.all, :id, :name) %>
   <%= f.hidden_field :client_id, :value => @client.id %>
-  <%= f.submit "Submit" %>
+  <%= f.submit "Submit", class: "btn btn-warning btn-block" %>
 <% end %>

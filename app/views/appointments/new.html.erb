@@ -1,4 +1,7 @@
-<h1>Make an appointment</h1>
+<center>
+<h3 style="color: #F8F9FA">Make an appointment<br>_____________</h3>
+<br>
+
 <% if @app.errors.any? %>
   <div id="error_explanation">
     <p>
@@ -13,5 +16,10 @@
     </ul>
   </div>
 <% end %>
-<br>
-  <%= render 'form', client: @client %>
+
+<div class="card" style="width:600px">
+  <div class="card-body">
+    <%= render 'form', client: @client %>
+  </div>
+</div>
+</center>
