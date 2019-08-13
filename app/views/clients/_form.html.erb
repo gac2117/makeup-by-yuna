@@ -1,15 +1,8 @@
-<%= form_for @client do |f| %>
-  <%= f.label 'Name' %><br>
-  <%= f.text_field :name %><br><br>
+<%= bootstrap_form_for @client, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8" do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :email %>
+  <%= f.text_field :extra, label: "URL of profile picture" %>
+  <%= f.password_field :password %>
 
-  <%= f.label 'Email Address' %><br>
-  <%= f.text_field :email %><br><br>
-
-  <%= f.label 'URL of profile picture' %><br>
-  <%= f.text_field :extra %><br><br>
-
-  <%= f.label 'Password' %><br>
-  <%= f.password_field :password %><br><br>
-
-  <%= f.submit "Submit" %>
+  <%= f.submit "Submit", class: "btn btn-warning" %>
 <% end %>

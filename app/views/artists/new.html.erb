@@ -1,5 +1,4 @@
 <center>
-<h3>Sign Up as a Makeup Artist</h3>
 <% if @artist.errors.any? %>
   <div id="error_explanation">
     <p>
@@ -15,5 +14,10 @@
   </div>
 <% end %>
 <br>
-<%= render 'form' %>
+<div class="card" style="width:600px">
+  <div class="card-header"><h3>Sign Up as a Makeup Artist</h3></div>
+  <div class="card-body">
+    <%= render 'form' %>
+  </div>
+</div>
 </center>

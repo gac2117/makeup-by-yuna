@@ -1,12 +1,10 @@
 <center>
-<h3>Sign Up as a Client</h3>
 <% if @client.errors.any? %>
   <div id="error_explanation">
     <p>
       <%= pluralize(@client.errors.count, "error") %>
       prohibited this appointment from being saved:
     </p>
- 
     <ul>
     <% @client.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
@@ -14,10 +12,16 @@
     </ul>
   </div>
 <% end %>
-<br>
-  <%= render 'form' %>
-<br>
 
-<h4>Or</h4><br>
-<a href="/auth/facebook"><img src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&_nc_ht=scontent-atl3-1.xx&oh=b196524687d8f32a91f1f08702c26ddb&oe=5D51E9EA" style="width:200px;height:35px;"></a>
+<br>
+<div class="card" style="width:600px">
+  <div class="card-header"><h3>Sign Up as a Client</h3></div>
+  <div class="card-body">
+    <%= render 'form' %>
+  <hr>
+  <h4>Or</h4>
+  <a href="/auth/facebook"><img src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&_nc_ht=scontent-atl3-1.xx&oh=b196524687d8f32a91f1f08702c26ddb&oe=5D51E9EA" style="width:200px;height:35px;"></a>
+  </div>
+</div>
+<br>
 </center>

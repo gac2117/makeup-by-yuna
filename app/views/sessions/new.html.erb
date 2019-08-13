@@ -3,22 +3,18 @@
   <%= flash[:error] %>
 </div>
 <br>
-
 <div class="card" style="width:600px">
-  <div class="card-header">Sign In</div>
+  <div class="card-header"><h3>Sign In</h3></div>
   <div class="card-body">
-	<%= bootstrap_form_for @user, url: "/signin" do |f| %>
+	<%= bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8", url: "/signin" do |f| %>
 	  <%= f.text_field :email %>
 	  <%= f.password_field :password %>
 	  <br>
-	  <%= f.submit "Sign In" %>
+	  <%= f.submit "Sign In", class: "btn btn-warning" %>
 	<% end %>
+	<hr>
+	<h4>Or</h4>
+	<a href="/auth/facebook"><img src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&_nc_ht=scontent-atl3-1.xx&oh=b196524687d8f32a91f1f08702c26ddb&oe=5D51E9EA" style="width:200px;height:35px;"></a>
   </div>
 </div>
-
-
-
-<hr>
-<h4>Or</h4>
-<a href="/auth/facebook"><img src="https://scontent-atl3-1.xx.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?_nc_cat=105&_nc_ht=scontent-atl3-1.xx&oh=b196524687d8f32a91f1f08702c26ddb&oe=5D51E9EA" style="width:200px;height:35px;"></a>
 </center>
