@@ -8,13 +8,15 @@
 </div><br>
 
 <img width="200" src="<%= @client.extra %>"><br><br>
-  <div class="btn btn-light btn-sm">
-    <%= link_to "Edit Profile", edit_client_path(@client), :class => "btn btn-sm", :id => "edit_profile" %>
-  </div>
+  
 <br><br>
-<div class="card" style="width: 800px">
-  <div class="card-body">
+
     <% if @client == @user %>
+    <div class="card" style="width: 800px">
+  <div class="card-body">
+    <div class="btn btn-light btn-sm">
+    <%= link_to "Edit Profile", edit_client_path(@client), :class => "btn btn-sm", :id => "edit_profile" %>
+     </div>
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -39,7 +41,9 @@
     </div>
   </div>
 <% else %>
-<button id="artist_apps"><%= link_to "Go Back", appointments_path %></button>
+<div class="btn btn-warning btn-sm">
+    <%= link_to "Go Back", appointments_path, :class => "btn btn-sm", :id => "artist_apps" %>
+</div>
 <% end %>
 
 </center>

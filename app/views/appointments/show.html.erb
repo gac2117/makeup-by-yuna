@@ -1,28 +1,44 @@
-<h1>Appointment Details</h1>
-<ul class="list-group">
-	<li class="list-group-item">
+<center>
+<h3 style="color: #F8F9FA">Appointment Details<br>_____________</h3><br>
+<div class="card" style="width: 400px">
+  <div class="card-body text-left">
+	<ul class="list-group">
+	  <li class="list-group-item">
 		<h5 class="list-group-item-heading">Date and Time:</h5> 
-		<p class="list-group-item-text"><%= @app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></p>
-	</li>
-	<li class="list-group-item">
+		<%= @app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %>
+	  </li>
+	  <li class="list-group-item">
 		<h5 class="list-group-item-heading">Type of Service:</h5>
-		<p class="list-group-item-text"><%= @app.service %></p>
-	</li>
-	<li class="list-group-item">
+		<%= @app.service %>
+	  </li>
+	  <li class="list-group-item">
 		<h5 class="list-group-item-heading">Makeup Artist Name:</h5>
-		<p class="list-group-item-text"><%= @app.artist.name %></p>
-	</li>
-	<li class="list-group-item">
+		<%= @app.artist.name %>
+	  </li>
+	  <li class="list-group-item">
 		<h5 class="list-group-item-heading">Comments or Requests:</h5>
-		<p class="list-group-item-text"><%= @app.comments %></p>
-	</li>
-</ul>
+		<%= @app.comments %>
+	  </li>
+	</ul>
+	<br>
+
+	<% if @client %>
+	<div class="btn btn-warning btn-sm">
+      <%= link_to "Edit", edit_client_appointment_path(@app.client_id, @app.id), :class => "btn btn-sm", :id => "edit_app" %>
+    </div>
+    <div class="btn btn-outline-danger btn-sm">
+      <%= link_to "Delete", client_appointment_path(@app.client_id, @app.id), method: :delete, :class => "btn btn-sm", :id => "delete_app" %>
+    </div>
+  </div>
+</div>
 <br>
-<% if @client %>
-<button id="edit_app"><%= link_to "Edit", edit_client_appointment_path(@app.client_id, @app.id) %></button>
-<button id="delete_app"><%= link_to "Delete", client_appointment_path(@app.client_id, @app.id), method: :delete %></button>
-<br><br>
-<button id="back"><%= link_to "Go back", client_path(@app.client_id) %></button>
+
+<div class="btn btn-warning btn-sm">
+    <%= link_to "Go Back", client_path(@app.client_id), :class => "btn btn-sm", :id => "back" %>
+</div>
 <% else %>
-<button id="back"><%= link_to "Go back", appointments_path %></button>
+<div class="btn btn-warning btn-sm">
+    <%= link_to "Go Back", appointments_path, :class => "btn btn-sm", :id => "back" %>
+</div>
 <% end %>
+</center>

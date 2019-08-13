@@ -1,22 +1,28 @@
-<h1>Appointments for <%= @artist.name %></h1>
+<center>
+<h3 style="color: #F8F9FA">Appointments for <%= @artist.name %><br>_____________</h3><br>
+<div class="card" style="width: 800px">
+  <div class="card-body">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th>Client Name</th>
+          <th>Appointment Date</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+        <% @apps.each do |app| %>
+        <tbody>
+          <tr>
+            <td><%= link_to "#{app.client.name}", client_path(app.client_id) %></td>
+            <td><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
+            <td><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
+          </tr>
+        </tbody>
+        <% end %>
+    </table>
+  </div>
+</div>
 <br>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Client Name</th>
-      <th>Appointment Date</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-    <% @apps.each do |app| %>
-    <tbody>
-      <tr>
-        <td><%= link_to "#{app.client.name}", client_path(app.client_id) %>
-        <td><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
-        <td><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
-      </tr>
-    </tbody>
-    <% end %>
-  </table>
-  <br><br>
-  Go to your <%= link_to "Profile page", artist_path(@artist) %>
+<div class="btn btn-warning btn-sm">
+    <%= link_to "Profile Page", artist_path(@artist), :class => "btn btn-sm" %>
+</div>

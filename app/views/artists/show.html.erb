@@ -1,19 +1,26 @@
-<h1> Welcome to <%= @artist.name %>'s page!</h1>
-
-About <%= @artist.name %>:<br>
-<%= @artist.extra %><br>
+<center>
+<h3 style="color: #F8F9FA">Welcome to <%= @artist.name %>'s Profile<br>_____________</h3>
 <br>
+<div class="card" style="width: 800px">
+  <div class="card-body">
+  	<h5 class="card-title text-left">About <%= @artist.name %>:</h5>
+  	<p class="card-text text-left"><%= @artist.extra %></p>
 
 <% if @client %>
-<button id="go_back"><%= link_to "Go back", client_path(@client) %></button>
+<div class="btn btn-warning btn-sm">
+  <%= link_to "Go Back", client_path(@client), :class => "btn btn-sm", :id => "go_back" %>
+</div>
 
 <% elsif @current_artist %>
-<button id="edit_profile"><%= link_to "Edit Profile", edit_artist_path(@current_artist) %></button>
-<br><br>
-<button id="view_apps"><%= link_to "View Appointments", appointments_path %></button><br><br>
-<button id="sign_out"><%= link_to "Sign Out", signout_path, method: :delete %></button>
+<div class="btn btn-warning btn-sm">
+  <%= link_to "Edit", edit_artist_path(@current_artist), :class => "btn btn-sm", :id => "edit_profile" %>
+</div>
+<div class="btn btn-warning btn-sm">
+  <%= link_to "View Appointments", appointments_path, :class => "btn btn-sm", :id => "view_apps" %>
+</div>
 
 <% else %>
-<button id="go_back"><%= link_to "Go back", artist_path(@other_artist) %></button>
+<div class="btn btn-warning btn-sm">
+  <%= link_to "Go Back", artist_path(@other_artist), :class => "btn btn-sm", :id => "go_back" %>
+</div>
 <% end %>
-<br><br>

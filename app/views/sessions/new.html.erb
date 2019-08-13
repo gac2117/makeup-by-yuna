@@ -9,7 +9,7 @@
 	<%= bootstrap_form_for @user, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8", url: "/signin" do |f| %>
 	  <%= f.text_field :email, label: "Email Address:" %>
 	  <%= f.password_field :password, label: "Password:" %>
-	  <%= f.submit "Sign In", class: "btn btn-warning" %>
+	  <%= f.submit "Sign In", class: "btn btn-warning btn-block" %>
 	<% end %>
 	<hr>
 	<h4>Or</h4>
