@@ -33,12 +33,12 @@ gem 'pry'
 gem 'bootstrap-sass', '>= 3.4.1'
 gem "bootstrap_form", ">= 4.2.0"
 gem 'thin', '~> 1.7'
-gem 'omniauth'
-gem 'omniauth-facebook'
+# gem 'omniauth'
+# gem 'omniauth-facebook'
 gem 'rack-flash3'
 gem 'dotenv-rails'
 gem 'active_model_serializers'
-gem "omniauth-rails_csrf_protection"
+# gem "omniauth-rails_csrf_protection"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
