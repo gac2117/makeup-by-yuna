@@ -16,7 +16,6 @@ const bindClickHandlers = () => {
         $('#client-app-table').append(details);
       });
   });
-};
 
 class Appointment {
   constructor(app) {

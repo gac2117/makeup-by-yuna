@@ -38,8 +38,8 @@
       <% @apps.each do |app| %>
         <tbody id="apps-details">
           <tr>
-            <td id="app_date"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
-            <td id="app_artist"><%= link_to "#{app.artist.name}", artist_path(app.artist) %></td>
+            <td><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
+            <td><%= link_to "#{app.artist.name}", artist_path(app.artist) %></td>
             <td data-id="<%= app.id %>" client-id="<%= @client.id %>"><%= link_to "Click Here", client_appointment_path(@client, app) %></td>
           </tr>
           </tbody>
