@@ -1,7 +1,7 @@
 <center>
 <h5 style="color:#F8F9FA">SIGN UP AS A MAKEUP ARTIST<br>_____________</h5><br>
 <% if @artist.errors.any? %>
-  <div id="error_explanation">
+  <div id="error_explanation" class="alert alert-danger" role="alert">
     <p>
       <%= pluralize(@artist.errors.count, "error") %>
       prohibited this appointment from being saved:

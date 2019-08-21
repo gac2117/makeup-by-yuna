@@ -3,7 +3,7 @@
 <br>
 
 <% if @app.errors.any? %>
-  <div id="error_explanation">
+  <div id="error_explanation" class="alert alert-danger" role="alert">
     <p>
       <%= pluralize(@app.errors.count, "error") %>
       prohibited this appointment from being saved:
