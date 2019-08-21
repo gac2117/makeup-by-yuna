@@ -23,7 +23,7 @@
         <% end %>
     </table>
     <div class="btn btn-warning btn-sm">
-      <%= link_to "Profile Page", artist_path(@artist), :class => "btn btn-sm" %>
+      <%= link_to "Back to Profile", artist_path(@artist), :class => "btn btn-sm" %>
     </div>
     
     <% else %>
@@ -46,7 +46,7 @@
       <% end %>
     </table>
     <div class="btn btn-warning btn-sm">
-      <%= link_to "Go back to Profile", client_path(@client), :class => "btn btn-sm", :id => "client_profile" %>
+      <%= link_to "Back to Profile", client_path(@client), :class => "btn btn-sm", :id => "client_profile" %>
     </div>
     <% end %>
   </div>

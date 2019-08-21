@@ -8,23 +8,20 @@
   <%= flash[:notice] %>
 </div><br>
 
-<img width="200" src="<%= @client.extra %>"><br><br>
-
-  <% if @client == @user %>
-    <div class="btn btn-light btn-sm">
+<div class="card" style="width: 600px">
+  <div class="card-body">
+    <img width="200" src="<%= @client.extra %>"><hr>
+    <% if @client == @user %>
+    <div class="btn btn-warning btn-sm">
       <%= link_to "Edit Profile", edit_client_path(@client), :class => "btn btn-sm", :id => "edit_profile" %>
     </div>
-    <br><br>
-    
-      
-      <div class="btn btn-warning btn-sm">
+    <div class="btn btn-warning btn-sm">
       <%= link_to "Create New Appointment", new_client_appointment_path(@client), :class => "btn btn-sm", :id => "new_apppointment" %>
-      </div>
-
-<% else %>
-<div class="btn btn-warning btn-sm">
-    <%= link_to "Go Back", appointments_path, :class => "btn btn-sm", :id => "artist_apps" %>
-</div>
-<% end %>
-
+    </div>
+    <% else %>
+    <div class="btn btn-warning btn-sm">
+      <%= link_to "Go Back", appointments_path, :class => "btn btn-sm", :id => "artist_apps" %>
+    </div>
+    <% end %>
+  </div>
 </center>
