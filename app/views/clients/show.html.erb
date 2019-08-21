@@ -34,6 +34,9 @@
         </tbody>
       <% end %>
       </table>
+      <div class="btn btn-warning btn-sm" id="show-apps" client-id="<%= @client.id %>">
+        <%= link_to "Profile", client_path(@client), :class => "btn btn-sm", :id => "client_profile" %>
+      </div>
       <div class="btn btn-warning btn-sm">
       <%= link_to "Create New Appointment", new_client_appointment_path(@client), :class => "btn btn-sm", :id => "new_apppointment" %>
       </div>

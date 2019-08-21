@@ -19,6 +19,10 @@ class AppointmentsController < ApplicationController
       end
     else
       @artist = Artist.find_by(id:current_user)
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @app }
+      end
     end
   end
 

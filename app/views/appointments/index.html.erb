@@ -2,7 +2,7 @@
 <h3 style="color: #F8F9FA">Appointments for <%= @artist.name %><br>_____________</h3><br>
 <div class="card" style="width: 800px">
   <div class="card-body">
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="artist-app-table">
       <thead class="thead-light">
         <tr>
           <th>Client Name</th>
@@ -11,11 +11,11 @@
         </tr>
       </thead>
         <% @apps.each do |app| %>
-        <tbody>
+        <tbody id="apps-details">
           <tr>
             <td><%= link_to "#{app.client.name}", client_path(app.client_id) %></td>
             <td><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
-            <td><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
+            <td id="app-details" data-id="<%= app.id %>" client-id="<%= app.client_id %>"><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
           </tr>
         </tbody>
         <% end %>
