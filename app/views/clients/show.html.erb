@@ -16,7 +16,7 @@
     <br><br>
     <div class="card" style="width: 800px">
       <div class="card-body">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="client-app-table">
           <thead class="thead-light">
           <tr>
             <th>Appointment Date and Time</th>
@@ -25,11 +25,11 @@
           </tr>
           </thead>
         <% @apps.each do |app| %>
-        <tbody>
+        <tbody id="apps-details">
           <tr>
             <td id="app_date"><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
             <td id="app_artist"><%= link_to "#{app.artist.name}", artist_path(app.artist) %></td>
-            <td id="app_details"><%= link_to "Click Here", client_appointment_path(@client, app) %></td>
+            <td id="app-details" data-id="<%= app.id %>" client-id="<%= @client.id %>"><%= link_to "Click Here", client_appointment_path(@client, app) %></td>
           </tr>
         </tbody>
       <% end %>

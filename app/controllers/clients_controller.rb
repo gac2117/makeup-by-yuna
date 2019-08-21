@@ -3,9 +3,13 @@ class ClientsController < ApplicationController
   end
 
   def show
-    @client = Client.find_by(id: params[:id])
+    @client = User.find_by(id: params[:id])
     @user = User.find_by(id: current_user)
     @apps = @client.appointments.by_date
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @client }
+    end
   end
 
   def new

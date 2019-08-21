@@ -13,6 +13,10 @@ class AppointmentsController < ApplicationController
     @app = Appointment.find_by(id: params[:id])
     if !!Client.find_by(id: current_user)
       @client = Client.find_by(id: current_user)
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @app }
+      end
     else
       @artist = Artist.find_by(id:current_user)
     end
