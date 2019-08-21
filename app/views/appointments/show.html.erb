@@ -27,7 +27,7 @@
 	<div class="btn btn-warning btn-sm">
       <%= link_to "Edit", edit_client_appointment_path(@app.client_id, @app.id), :class => "btn btn-sm", :id => "edit_app" %>
     </div>
-    <div class="btn btn-outline-danger btn-sm">
+    <div class="btn btn-danger btn-sm">
       <%= link_to "Delete", client_appointment_path(@app.client_id, @app.id), method: :delete, :class => "btn btn-sm", :id => "delete_app" %>
     </div>
   </div>
