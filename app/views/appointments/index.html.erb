@@ -17,7 +17,7 @@
           <tr>
             <td><%= link_to "#{app.client.name}", client_path(app.client_id) %></td>
             <td><%= app.date_time.strftime("%A, %b %d, %Y at %l:%M %p") %></td>
-            <td id="app-details" data-id="<%= app.id %>" client-id="<%= app.client_id %>"><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
+            <td data-id="<%= app.id %>" client-id="<%= app.client_id %>"><%= link_to "Click Here", client_appointment_path(app.client_id, app) %></td>
           </tr>
         </tbody>
         <% end %>
