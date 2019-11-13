@@ -16,29 +16,27 @@
  */
 
 body {
-	background-image: url("/assets/makeup_img.png");
-	background-color: #F8F9FA;
-	height: 700px;
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-	position: relative;
-	background-attachment: fixed;
+  background-image: url('/assets/makeup_img.png');
+  background-color: #f8f9fa;
+  height: 700px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  background-attachment: fixed;
 }
 
 #flash {
-	color: red;
+  color: red;
 }
 
-
 #error_explanation {
-	color: red;
+  color: red;
 }
 
 #error_explanation ul {
-	list-style-type: none;
+  list-style-type: none;
 }
-
 
 .field_with_errors {
   padding: 2px;
@@ -47,18 +45,18 @@ body {
 }
 
 .container {
-	padding-top: 50px;
-	padding-bottom: 70px;
+  padding-top: 50px;
+  padding-bottom: 70px;
 }
 
 .full-width {
-	left: 50%;
-	margin-left: -50vw;
-	margin-right: -50vw;
-	max-width: 100vw;
-	position: relative;
-	right: 50%;
-	width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: 100vw;
+  position: relative;
+  right: 50%;
+  width: 100vw;
 }
 
 .footer {
@@ -66,7 +64,11 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #F6DAAD;
+  background-color: #f6daad;
   color: #212529;
   text-align: center;
+}
+
+.link_color {
+  color: rgb(22, 22, 22);
 }

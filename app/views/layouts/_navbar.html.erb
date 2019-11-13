@@ -8,7 +8,7 @@
       </li>
       <% if logged_in? %>
       <li class="nav-item">
-        <div class="nav-link"><%= link_to "Appointments", appointments_path %>
+        <div class="nav-link"><%= link_to "Appointments", appointments_path, class: 'link_color' %>
         </div>
       </li>
     <% end %>
@@ -24,7 +24,7 @@
     <ul class="navbar-nav ml-auto">          
     <% if logged_in? %>
       <li class="nav-item">
-        <div class="nav-link"><%= link_to "Sign Out", signout_path, method: :delete %>
+        <div class="nav-link"><%= link_to "Sign Out", signout_path, method: :delete, class: 'link_color' %>
         </div>
       </li>
     <% else %>
