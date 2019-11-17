@@ -1,13 +1,13 @@
 <%= bootstrap_form_for @app, layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8" do |f| %>
   <%= f.datetime_field :date_time, min: Date.today, label: "Date & Time:" %>
+  <%= f.collection_select(:artist_id, Artist.all, :id, :name) %>
   <%= f.form_group :service, label: { text: "Service:" } do %>
-  <%= f.radio_button_without_bootstrap :service, "Consultation" %>
-  <%= label_tag(:service_consultation, "Consultation") %>
-  <%= f.radio_button_without_bootstrap :service, "Event" %>
-  <%= label_tag(:service_event, "Event") %>
+    <%= f.radio_button_without_bootstrap :service, "Consultation" %>
+    <%= label_tag(:service_consultation, "Consultation") %>
+    <%= f.radio_button_without_bootstrap :service, "Event" %>
+    <%= label_tag(:service_event, "Event") %>
   <% end %>
   <%= f.text_field :comments, label: "Comments / Requests:" %>
-  <%= f.collection_select(:artist_id, Artist.all, :id, :name) %>
   <%= f.hidden_field :client_id, :value => @client.id %>
   <%= f.submit "Submit", class: "btn btn-warning btn-block" %>
 <% end %>
