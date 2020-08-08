@@ -10,6 +10,9 @@
 <div class="btn btn-warning btn-sm">
   <%= link_to "Back to Profile", client_path(@client), :class => "btn btn-sm", :id => "go_back" %>
 </div>
+<div class="btn btn-warning btn-sm">
+<%= link_to "Create New Appointment", new_client_appointment_path(@client), :class => "btn btn-sm", :id => "new_apppointment" %>
+</div>
 
 <% elsif @current_artist %>
 <div class="btn btn-warning btn-sm">
