@@ -3,19 +3,20 @@ $(() => {
 });
 
 const bindClickHandlers = () => {
-  $(document).on('click', '#app-details', function(e) {
+  $(document).on('click', '#app-details', function (e) {
     e.preventDefault();
     let id = $(this).attr('data-id');
     let clientId = $(this).attr('client-id');
     fetch(`/clients/${clientId}/appointments/${id}.json`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         $('#client-app-table').html('');
         let newApp = new Appointment(data);
         let details = newApp.formatDetails();
         $('#client-app-table').append(details);
       });
   });
+};
 
 class Appointment {
   constructor(app) {
@@ -53,7 +54,7 @@ class Appointment {
   }
 }
 
-const formatTime = date => {
+const formatTime = (date) => {
   let hour = date.getUTCHours();
   let min = date.getUTCMinutes();
 
