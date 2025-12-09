@@ -131,26 +131,31 @@ jobs:
           script: |
             const prNumber = context.issue.number;
             
+            // First, verify PR is mergeable using REST API
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+            });
+            
+            if (!pr.mergeable || pr.mergeable_state !== 'clean') {
+              console.log(`PR is not mergeable. State: ${pr.mergeable_state}`);
+              return;
+            }
+            
             try {
-              // Get the PR node ID using GraphQL
+              // Get the PR node ID using GraphQL (only need the ID for the mutation)
               const { data: prData } = await github.graphql(`
                 query {
                   repository(owner: "${context.repo.owner}", name: "${context.repo.repo}") {
                     pullRequest(number: ${prNumber}) {
                       id
-                      mergeable
-                      mergeableState
                     }
                   }
                 }
               `);
               
-              const pullRequest = prData.repository.pullRequest;
-              
-              if (!pullRequest.mergeable || pullRequest.mergeableState !== 'CLEAN') {
-                console.log(`PR is not mergeable. State: ${pullRequest.mergeableState}`);
-                return;
-              }
+              const pullRequestId = prData.repository.pullRequest.id;
               
               // Enable auto-merge using GraphQL
               const mutation = `
@@ -169,7 +174,7 @@ jobs:
               `;
               
               await github.graphql(mutation, {
-                pullRequestId: pullRequest.id,
+                pullRequestId: pullRequestId,
                 mergeMethod: 'SQUASH' // Change to MERGE or REBASE if preferred
               });
               
