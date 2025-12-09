@@ -1,0 +1,199 @@
+name: Auto-merge Dependabot PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  check_suite:
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    # Only run if the PR is from Dependabot
+    if: github.actor == 'dependabot[bot]'
+    
+    steps:
+      - name: Get PR information
+        id: pr-info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            
+            core.setOutput('base-ref', pr.base.ref);
+            core.setOutput('head-ref', pr.head.ref);
+            core.setOutput('head-sha', pr.head.sha);
+            core.setOutput('mergeable', pr.mergeable);
+            core.setOutput('mergeable-state', pr.mergeable_state);
+            
+            return {
+              number: pr.number,
+              mergeable: pr.mergeable,
+              mergeable_state: pr.mergeable_state,
+              title: pr.title,
+            };
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.pr-info.outputs.head-ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Resolve merge conflicts by accepting incoming changes
+        if: steps.pr-info.outputs.mergeable == 'false'
+        run: |
+          echo "🔧 Merge conflicts detected. Resolving by accepting Dependabot's changes..."
+          
+          # Fetch the base branch
+          git fetch origin ${{ steps.pr-info.outputs.base-ref }}:${{ steps.pr-info.outputs.base-ref }}
+          
+          # Attempt to merge the base branch into the PR branch
+          if ! git merge --no-edit --no-ff origin/${{ steps.pr-info.outputs.base-ref }}; then
+            echo "⚠️  Merge conflicts detected. Resolving by accepting Dependabot changes (--ours)..."
+            
+            # When merging base into PR branch:
+            # --ours = current branch (PR branch = Dependabot's changes)
+            # --theirs = what we're merging in (base branch)
+            # We want to keep Dependabot's changes, so use --ours
+            git checkout --ours .
+            git add .
+            
+            # Complete the merge
+            git commit -m "Resolve merge conflicts by accepting Dependabot changes" || true
+            
+            # Push the resolved changes back to the PR branch
+            git push origin HEAD:${{ steps.pr-info.outputs.head-ref }}
+            
+            echo "✅ Merge conflicts resolved and pushed to PR branch"
+          else
+            echo "✅ No conflicts, merge successful"
+          fi
+
+      - name: Wait for status checks
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const maxWaitTime = 300000; // 5 minutes
+            const checkInterval = 10000; // 10 seconds
+            const startTime = Date.now();
+            
+            while (Date.now() - startTime < maxWaitTime) {
+              const { data: pr } = await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+              });
+              
+              // Check if PR is mergeable and all checks have passed
+              if (pr.mergeable === true && pr.mergeable_state === 'clean') {
+                console.log('✅ PR is ready to merge!');
+                return;
+              }
+              
+              // If PR is still not mergeable after conflict resolution, check again
+              if (pr.mergeable === false) {
+                console.log('⏳ PR still has conflicts, waiting for resolution to propagate...');
+                await new Promise(resolve => setTimeout(resolve, checkInterval));
+                continue;
+              }
+              
+              console.log(`⏳ Waiting for checks to pass... Current state: ${pr.mergeable_state}`);
+              await new Promise(resolve => setTimeout(resolve, checkInterval));
+            }
+            
+            // Final check
+            const { data: finalPr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            
+            if (finalPr.mergeable !== true || finalPr.mergeable_state !== 'clean') {
+              core.setFailed(`PR checks did not pass. State: ${finalPr.mergeable_state}`);
+            }
+
+      - name: Enable auto-merge using GraphQL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            
+            try {
+              // Get the PR node ID using GraphQL
+              const { data: prData } = await github.graphql(`
+                query {
+                  repository(owner: "${context.repo.owner}", name: "${context.repo.repo}") {
+                    pullRequest(number: ${prNumber}) {
+                      id
+                      mergeable
+                      mergeableState
+                    }
+                  }
+                }
+              `);
+              
+              const pullRequest = prData.repository.pullRequest;
+              
+              if (!pullRequest.mergeable || pullRequest.mergeableState !== 'CLEAN') {
+                console.log(`PR is not mergeable. State: ${pullRequest.mergeableState}`);
+                return;
+              }
+              
+              // Enable auto-merge using GraphQL
+              const mutation = `
+                mutation EnableAutoMerge($pullRequestId: ID!, $mergeMethod: PullRequestMergeMethod!) {
+                  enablePullRequestAutoMerge(input: {
+                    pullRequestId: $pullRequestId,
+                    mergeMethod: $mergeMethod
+                  }) {
+                    pullRequest {
+                      autoMergeRequest {
+                        enabledAt
+                      }
+                    }
+                  }
+                }
+              `;
+              
+              await github.graphql(mutation, {
+                pullRequestId: pullRequest.id,
+                mergeMethod: 'SQUASH' // Change to MERGE or REBASE if preferred
+              });
+              
+              console.log(`✅ Enabled auto-merge for PR #${prNumber}`);
+            } catch (error) {
+              // If auto-merge is not enabled in repo settings, try direct merge
+              if (error.message && error.message.includes('Auto-merge is not enabled')) {
+                console.log('⚠️  Auto-merge not enabled in repository settings. Attempting direct merge...');
+                
+                try {
+                  await github.rest.pulls.merge({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: prNumber,
+                    merge_method: 'squash', // Options: 'merge', 'squash', or 'rebase'
+                  });
+                  
+                  console.log(`✅ Successfully merged PR #${prNumber}`);
+                } catch (mergeError) {
+                  console.log(`❌ Could not merge PR: ${mergeError.message}`);
+                  core.warning('To enable auto-merge, go to: Repository Settings > General > Pull Requests > Allow auto-merge');
+                }
+              } else {
+                console.log(`Error: ${error.message}`);
+                throw error;
+              }
+            }
