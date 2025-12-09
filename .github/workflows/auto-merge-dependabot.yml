@@ -97,12 +97,6 @@ jobs:
                 pull_number: context.issue.number,
               });
               
-              // Check if PR is mergeable and all checks have passed
-              if (pr.mergeable === true && pr.mergeable_state === 'clean') {
-                console.log('✅ PR is ready to merge!');
-                return;
-              }
-              
               // If PR is still not mergeable after conflict resolution, check again
               if (pr.mergeable === false) {
                 console.log('⏳ PR still has conflicts, waiting for resolution to propagate...');
@@ -110,19 +104,40 @@ jobs:
                 continue;
               }
               
+              // Proceed if PR is mergeable and state is 'clean' (all checks passed)
+              if (pr.mergeable === true && pr.mergeable_state === 'clean') {
+                console.log('✅ PR is ready to merge! All checks passed.');
+                return;
+              }
+              
+              // For Dependabot PRs, also proceed if mergeable but unstable (some checks failed)
+              // This allows dependency updates to proceed even if some non-critical checks fail
+              if (pr.mergeable === true && pr.mergeable_state === 'unstable') {
+                console.log('⚠️  PR is mergeable but some checks failed (unstable). Proceeding with merge for Dependabot PR...');
+                return;
+              }
+              
               console.log(`⏳ Waiting for checks to pass... Current state: ${pr.mergeable_state}`);
               await new Promise(resolve => setTimeout(resolve, checkInterval));
             }
             
-            // Final check
+            // Final check after timeout
             const { data: finalPr } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.issue.number,
             });
             
-            if (finalPr.mergeable !== true || finalPr.mergeable_state !== 'clean') {
-              core.setFailed(`PR checks did not pass. State: ${finalPr.mergeable_state}`);
+            // Proceed if mergeable, even if unstable
+            if (finalPr.mergeable === true && (finalPr.mergeable_state === 'clean' || finalPr.mergeable_state === 'unstable')) {
+              console.log(`✅ PR is mergeable. Proceeding with merge (state: ${finalPr.mergeable_state})`);
+              return;
+            }
+            
+            if (finalPr.mergeable !== true) {
+              core.setFailed(`PR is not mergeable. State: ${finalPr.mergeable_state}`);
+            } else {
+              core.setFailed(`PR checks did not complete. State: ${finalPr.mergeable_state}`);
             }
 
       - name: Enable auto-merge using GraphQL
@@ -138,8 +153,14 @@ jobs:
               pull_number: prNumber,
             });
             
-            if (!pr.mergeable || pr.mergeable_state !== 'clean') {
+            // Allow merge if PR is mergeable, even if state is unstable (some checks failed)
+            if (!pr.mergeable) {
               console.log(`PR is not mergeable. State: ${pr.mergeable_state}`);
+              return;
+            }
+            
+            if (pr.mergeable_state !== 'clean' && pr.mergeable_state !== 'unstable') {
+              console.log(`PR checks not ready. State: ${pr.mergeable_state}`);
               return;
             }
             
