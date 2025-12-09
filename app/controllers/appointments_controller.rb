@@ -5,14 +5,14 @@ class AppointmentsController < ApplicationController
       @apps = @artist.appointments.by_date
       respond_to do |format|
         format.html { render :index }
-        format.json { render json: @apps }
+        format.json { render json: @apps.map { |app| AppointmentSerializer.new(app).as_json } }
       end
     else
       @client = Client.find_by(id: current_user)
       @apps = @client.appointments.by_date
       respond_to do |format|
         format.html { render :index }
-        format.json { render json: @apps }
+        format.json { render json: @apps.map { |app| AppointmentSerializer.new(app).as_json } }
       end
     end
   end
@@ -23,13 +23,13 @@ class AppointmentsController < ApplicationController
       @client = Client.find_by(id: current_user)
       respond_to do |format|
         format.html { render :show }
-        format.json { render json: @app }
+        format.json { render json: AppointmentSerializer.new(@app).as_json }
       end
     else
       @artist = Artist.find_by(id:current_user)
       respond_to do |format|
         format.html { render :show }
-        format.json { render json: @app }
+        format.json { render json: AppointmentSerializer.new(@app).as_json }
       end
     end
   end

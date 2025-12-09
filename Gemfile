@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.7'
+gem 'rails', '~> 7.1.5'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.5'
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
@@ -29,7 +29,7 @@ gem "bootstrap_form", "~> 4.0"
 # gem 'omniauth-facebook'
 gem 'rack-flash3'
 gem 'dotenv-rails'
-gem 'active_model_serializers'
+# Removed active_model_serializers - using Rails 7 built-in serialization
 # gem "omniauth-rails_csrf_protection"
 
 # Use Capistrano for deployment

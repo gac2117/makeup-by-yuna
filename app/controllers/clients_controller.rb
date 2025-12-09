@@ -6,10 +6,10 @@ class ClientsController < ApplicationController
     @client = User.find_by(id: params[:id])
     @user = User.find_by(id: current_user)
     @apps = @client.appointments.by_date
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @client }
-    end
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: ClientSerializer.new(@client).as_json }
+      end
   end
 
   def new
